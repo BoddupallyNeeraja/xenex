@@ -36,10 +36,9 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link 
             href="/" 
-            className="text-3xl font-bold font-display text-white group transition-all duration-300 hover:text-xenex-red relative"
+            className="text-3xl font-bold font-display text-xenex-red group transition-all duration-300 hover:animate-pulse-red relative"
           >
-            <span className="text-xenex-red animate-pulse-red inline-block">X</span>
-            <span className="group-hover:animate-pulse-red inline-block">ENEX</span>
+            XENEX
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-xenex-red group-hover:w-full transition-all duration-300"></span>
           </Link>
           
