@@ -199,20 +199,20 @@ export default function Media() {
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-xenex-red transition-colors duration-300 text-3xl hover:scale-110 transform"
               >
-                📷
-              </a>
+              📷
+            </a>
               <a 
                 href="http://www.youtube.com/@xenexindia" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-xenex-red transition-colors duration-300 text-3xl hover:scale-110 transform"
               >
-                🎬
-              </a>
-              <a href="#" className="text-white/70 hover:text-xenex-red transition-colors duration-300 text-3xl hover:scale-110 transform">
-                📘
-              </a>
-            </div>
+              🎬
+            </a>
+            <a href="#" className="text-white/70 hover:text-xenex-red transition-colors duration-300 text-3xl hover:scale-110 transform">
+              📘
+            </a>
+          </div>
         </div>
       </section>
     </div>
