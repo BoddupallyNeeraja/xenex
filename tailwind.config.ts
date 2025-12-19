@@ -11,13 +11,13 @@ const config: Config = {
       colors: {
         xenex: {
           dark: "#000000",
-          black: "#0a0a0a",
-          red: "#dc2626",
-          "red-dark": "#b91c1c",
-          "red-light": "#ef4444",
-          gray: "#1a1a1a",
-          "gray-light": "#2a2a2a",
-          "gray-dark": "#0f0f0f",
+          black: "#000000",
+          red: "#ff0000",
+          "red-dark": "#cc0000",
+          "red-light": "#ff0000",
+          gray: "#000000",
+          "gray-light": "#000000",
+          "gray-dark": "#000000",
         },
       },
       fontFamily: {
@@ -66,8 +66,8 @@ const config: Config = {
           "50%": { transform: "translateY(-20px)" },
         },
         glow: {
-          "0%": { boxShadow: "0 0 5px rgba(220, 38, 38, 0.5), 0 0 10px rgba(220, 38, 38, 0.3)" },
-          "100%": { boxShadow: "0 0 20px rgba(220, 38, 38, 0.8), 0 0 30px rgba(220, 38, 38, 0.5)" },
+          "0%": { boxShadow: "0 0 5px rgba(255, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.3)" },
+          "100%": { boxShadow: "0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-1000px 0" },
@@ -91,8 +91,8 @@ const config: Config = {
         },
       },
       boxShadow: {
-        "red-glow": "0 0 20px rgba(220, 38, 38, 0.3)",
-        "red-glow-lg": "0 0 40px rgba(220, 38, 38, 0.4)",
+        "red-glow": "0 0 20px rgba(255, 0, 0, 0.3)",
+        "red-glow-lg": "0 0 40px rgba(255, 0, 0, 0.4)",
         "card": "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)",
       },
     },

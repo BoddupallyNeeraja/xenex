@@ -44,7 +44,7 @@ export default function DesignProcess() {
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=1920&h=1080&fit=crop"
-            alt="Design Process"
+            alt="Design Products"
             fill
             className="object-cover"
             priority
@@ -53,7 +53,7 @@ export default function DesignProcess() {
         </div>
         <div className="relative z-20 text-center px-4 md:px-6">
           <h1 className="text-5xl md:text-7xl font-bold font-display text-white mb-4">
-            Design <span className="text-xenex-red">Process</span>
+            Design <span className="text-xenex-red">Products</span>
           </h1>
           <p className="text-xl md:text-2xl text-white/80">
             How a vision becomes a build
@@ -61,7 +61,7 @@ export default function DesignProcess() {
         </div>
       </section>
 
-      {/* Process Steps */}
+      {/* Products Steps */}
       <section className="py-20 px-4 md:px-6 bg-xenex-black">
         <div className="container mx-auto max-w-6xl">
           <div className="space-y-24">

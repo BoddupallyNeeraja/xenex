@@ -22,7 +22,7 @@ export default function Header() {
     { href: '/about', label: 'About' },
     { href: '/builds', label: 'Builds' },
     { href: '/film-cars', label: 'Film Cars' },
-    { href: '/design-process', label: 'Process' },
+    { href: '/design-process', label: 'Products' },
     { href: '/gallery', label: 'Gallery' },
     { href: '/media', label: 'Media' },
     { href: '/contact', label: 'Contact' },
