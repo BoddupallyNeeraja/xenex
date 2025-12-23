@@ -61,9 +61,21 @@ export default async function Page() {
     .from('your_table')
     .select('*')
   
-  return <div>{/* Your component */}</div>
+  if (error) {
+    console.error('Error:', error)
+  }
+  
+  return (
+    <div>
+      {data?.map((item) => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  )
 }
 ```
+
+**Note:** The server client uses `@supabase/ssr` for proper cookie handling in Next.js App Router.
 
 ## Authentication
 

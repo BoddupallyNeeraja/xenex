@@ -13,15 +13,67 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', projectType: '', vision: '' });
-    }, 3000);
+    setLoading(true);
+    setError(null);
+
+    // Prepare the data
+    const submissionData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || undefined,
+      project_type: formData.projectType,
+      vision: formData.vision
+    };
+
+    try {
+      // Send to backend API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const result = await response.json();
+
+      // Handle response
+      if (!response.ok || !result.success) {
+        // Extract error message from API response
+        const errorMessage = result.message || result.error || 'Failed to submit form. Please try again.';
+        throw new Error(errorMessage);
+      }
+
+      // Success - clear form and show success message
+      setSubmitted(true);
+      setFormData({ 
+        name: '', 
+        email: '', 
+        phone: '', 
+        projectType: '', 
+        vision: '' 
+      });
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+
+    } catch (err: any) {
+      // Handle errors
+      console.error('Form submission error:', err);
+      
+      // Use error message from API or fallback to generic message
+      const errorMessage = err.message || 'Failed to submit form. Please try again.';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -70,7 +122,13 @@ export default function Contact() {
 
               {submitted && (
                 <div className="mb-6 p-4 bg-xenex-red/20 border border-xenex-red rounded-lg">
-                  <p className="text-xenex-red font-semibold">Thank you! We'll get back to you soon.</p>
+                  <p className="text-xenex-red font-semibold">✓ Thank you! Your vision has been submitted. We'll get back to you soon.</p>
+                </div>
+              )}
+
+              {error && (
+                <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg">
+                  <p className="text-red-400 font-semibold">✗ {error}</p>
                 </div>
               )}
 
@@ -161,9 +219,10 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full btn-primary"
+                  disabled={loading}
+                  className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Your Vision
+                  {loading ? 'Submitting...' : 'Submit Your Vision'}
                 </button>
               </form>
             </div>

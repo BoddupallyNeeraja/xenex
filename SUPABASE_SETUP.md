@@ -22,8 +22,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 3. Create a new project or select an existing one
 4. Go to **Settings** → **API**
 5. Copy the following:
-   - **Project URL** → Use for `NEXT_PUBLIC_SUPABASE_URL`
-   - **anon public** key → Use for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - **Project URL** → Use for `https://ftzbzofhjbcofxssimxr.supabase.co`
+   - **anon public** key → Use for `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0emJ6b2ZoamJjb2Z4c3NpbXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYxMTY5NTMsImV4cCI6MjA4MTY5Mjk1M30.7qfudcAiAN9AFCZv42YFRP9con73CKB_vvxiOFwJP_s`
 
 ### 3. Replace Placeholder Values
 

@@ -1,33 +1,47 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
-export async function createServerClient() {
-  const cookieStore = await cookies()
+/**
+ * Creates a Supabase client for server-side usage
+ * Uses service role key if available, otherwise falls back to anon key
+ * 
+ * IMPORTANT: Service role key bypasses RLS - only use in trusted server environments
+ * 
+ * @returns Supabase client instance
+ */
+export async function createServerSupabaseClient(): Promise<SupabaseClient> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Missing Supabase environment variables')
+  if (!supabaseUrl) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable')
   }
 
-  return createClient(supabaseUrl, supabaseAnonKey, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll()
-      },
-      setAll(cookiesToSet) {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          )
-        } catch {
-          // The `setAll` method was called from a Server Component.
-          // This can be ignored if you have middleware refreshing
-          // user sessions.
-        }
-      },
-    },
-  })
-}
+  // Prefer service role key for server-side (bypasses RLS and schema cache)
+  // Fallback to anon key if service role not available
+  const apiKey = supabaseServiceKey || supabaseAnonKey
 
+  if (!apiKey) {
+    throw new Error('Missing Supabase API key. Set SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  }
+
+  // Create client with server-optimized configuration
+  const client = createClient(supabaseUrl, apiKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false
+    },
+    db: {
+      schema: 'public'
+    },
+    global: {
+      headers: {
+        'x-client-info': 'xenex-server-api'
+      }
+    }
+  })
+
+  return client
+}
